@@ -11,7 +11,11 @@
     <title>Index</title>
   </head>
   <body>
-index
+    <a href="/clients">Список</a>
+    <form action="add.jsp" method="post">
+      <input class = "button" type="submit" value="Добавить"/>
+    </form>
 
+    <a href="add.jsp"></a>
   </body>
 </html>

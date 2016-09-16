@@ -1,6 +1,6 @@
 <%@ page import="client.model.Client" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,6 +15,26 @@
     <%--<%}%>--%>
 <%--<%List<Client> cls=${clients};%>--%>
 <table border="2" width="80%">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Имя
+        </th>
+        <th>
+            Фамилия
+        </th>
+        <th>
+            Отчество
+        </th>
+        <th>
+            Дата рождения
+        </th>
+        <th>
+            Номер счета
+        </th>
+    </tr>
     <%
         List<Client> clients = (List<Client>) request.getAttribute("clients");
         for (Client client:clients){%>
@@ -32,10 +52,13 @@
                     <%=client.getPatronymicName()%>
                 </td>
                 <td>
-                    <%=client.getBirthday()%>
+                    <%=new SimpleDateFormat("dd-mm-yyyy").format(client.getBirthday())%>
                 </td>
                 <td>
                     <%=client.getAccountNumber()%>
+                </td>
+                <td>
+                    Изменить
                 </td>
             </tr>
         <%}

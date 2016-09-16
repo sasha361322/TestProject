@@ -6,6 +6,9 @@
     <bean name="/clients"
           class="client.controller.ClientController" />
 
+    <bean name="/add"
+          class="client.controller.AddController" />
+
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
