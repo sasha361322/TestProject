@@ -61,28 +61,4 @@
         </property>
     </bean>
 
-    <!--<bean name="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">-->
-        <!--<property name="sessionFactory" ref="sessionFactory" />-->
-    <!--</bean>-->
-<!---->
-    <!--<bean name="abstractTransactionProxy"-->
-          <!--class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"-->
-          <!--abstract="true">-->
-        <!--<property name="transactionManager" ref="txManager" />-->
-        <!--<property name="transactionAttributes">-->
-            <!--<props>-->
-                <!--<prop key="find*">PROPAGATION_REQUIRED, readOnly-->
-                <!--</prop>-->
-                <!--<prop key="get*">PROPAGATION_REQUIRED, readOnly-->
-                <!--</prop>-->
-                <!--<prop key="add*">PROPAGATION_REQUIRED,-Exception-->
-                <!--</prop>-->
-                <!--<prop key="update*">PROPAGATION_REQUIRED,-Exception-->
-                <!--</prop>-->
-                <!--<prop key="delete*">PROPAGATION_REQUIRED,-Exception-->
-                <!--</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
-
 </beans>
