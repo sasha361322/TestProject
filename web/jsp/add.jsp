@@ -12,32 +12,36 @@
     <title>Добавить</title>
 </head>
 <body>
-<%=request.getAttribute("msg")%>
-<form:form method="post" action="/add">
+<form:form method="post" action="/add" modelAttribute="clientForm">
     <table>
         <tr>
-            <td><form:label path="id">Id</form:label></td>
-            <td><form:input path="id"/></td>
+            <td><form:label path="Id">Id</form:label></td>
+            <td><form:input path="Id"/></td>
         </tr>
         <tr>
-            <td><form:label path="surname">surname</form:label></td>
-            <td><form:input path="surname"/></td>
+            <td><form:label path="Surname">Surname</form:label></td>
+            <td><form:input path="Surname"/></td>
         </tr>
         <tr>
-            <td><form:label path="name">name</form:label></td>
-            <td><form:input path="name"/></td>
+            <td><form:label path="Name">name</form:label></td>
+            <td><form:input path="Name"/></td>
         </tr>
         <tr>
-            <td><form:label path="patronymicname">patronymicname</form:label></td>
-            <td><form:input path="patronymicname"/></td>
+            <td><form:label path="PatronymicName">PatronymicName</form:label></td>
+            <td><form:input path="PatronymicName"/></td>
         </tr>
         <tr>
-            <td><form:label path="id">Id</form:label></td>
-            <td><form:input path="id"/></td>
+            <td><form:label path="Birthday">Birthday</form:label></td>
+            <td><form:input path="Birthday"/></td>
         </tr>
         <tr>
-            <td><form:label path="id">Id</form:label></td>
-            <td><form:input path="id"/></td>
+            <td><form:label path="AccountNumber">Account Number</form:label></td>
+            <td><form:input path="AccountNumber"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit"/>
+            </td>
         </tr>
     </table>
 </form:form>

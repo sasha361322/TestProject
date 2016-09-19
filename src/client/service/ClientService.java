@@ -13,26 +13,26 @@ public class ClientService {
     }
 
     public void addClient(Client client){
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
         session.persist(client);
     }
     public void updateClient(Client client){
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
         session.update(client);
     }
     public void removeClient(int id){
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
         Client client = (Client)session.load(Client.class, new Integer(id));
         if (client!=null)
            session.delete(client);
     }
     public Client getClientById(int id){
-        Session session=this.sessionFactory.openSession();
+        Session session=this.sessionFactory.getCurrentSession();
         Client client=(Client)session.load(Client.class, id);
         return client;
     }
     public List<Client> listClients() {
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
         List<Client> result = session.createQuery("from Client").list();
         return result;
     }
