@@ -52,7 +52,7 @@
                     <%=client.getPatronymicName()%>
                 </td>
                 <td>
-                    <%=new SimpleDateFormat("dd-mm-yyyy").format(client.getBirthday())%>
+                    <%=new SimpleDateFormat("dd-MM-yyyy").format(client.getBirthday())%>
                 </td>
                 <td>
                     <%=client.getAccountNumber()%>

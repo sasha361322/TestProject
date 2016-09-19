@@ -12,7 +12,7 @@
   </head>
   <body>
     <a href="/clients">Список</a>
-    <form action="add.jsp" method="post">
+    <form action="/add" method="get">
       <input class = "button" type="submit" value="Добавить"/>
     </form>
 

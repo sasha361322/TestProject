@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: sasha
@@ -11,5 +12,34 @@
     <title>Добавить</title>
 </head>
 <body>
+<%=request.getAttribute("msg")%>
+<form:form method="post" action="/add">
+    <table>
+        <tr>
+            <td><form:label path="id">Id</form:label></td>
+            <td><form:input path="id"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="surname">surname</form:label></td>
+            <td><form:input path="surname"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="name">name</form:label></td>
+            <td><form:input path="name"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="patronymicname">patronymicname</form:label></td>
+            <td><form:input path="patronymicname"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="id">Id</form:label></td>
+            <td><form:input path="id"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="id">Id</form:label></td>
+            <td><form:input path="id"/></td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>

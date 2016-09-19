@@ -5,10 +5,10 @@
 <hibernate-mapping package="client.model">
     <class name="client.model.Client" table="client">
         <id name="Id" column="Id"/>
-        <property name="accountNumber" column="AccountNumber"/>
-        <property name="birthday" column="Birthday"/>
-        <property name="name" column="Name"/>
         <property name="surname" column="Surname"/>
+        <property name="name" column="Name"/>
         <property name="patronymicName" column="PatronymicName"/>
+        <property name="birthday" column="Birthday"/>
+        <property name="accountNumber" column="AccountNumber"/>
     </class>
 </hibernate-mapping>

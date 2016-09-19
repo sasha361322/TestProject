@@ -21,6 +21,7 @@
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
                 hibernate.show_sql=true
+                hibernate.c3p0.timeout=600
             </value>
         </property>
     </bean>

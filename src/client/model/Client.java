@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Client implements Serializable {
     private int Id;
-    private String Surname;
+    private String Sirname;
     private String Name;
     private String PatronymicName;
     private Date Birthday;
@@ -17,10 +17,10 @@ public class Client implements Serializable {
         Id = id;
     }
     public String getSurname() {
-        return Surname;
+        return Sirname;
     }
     public void setSurname(String surname) {
-        Surname = surname;
+        Sirname = surname;
     }
     public String getName() {
         return Name;
@@ -51,7 +51,7 @@ public class Client implements Serializable {
     public String toString() {
         return "Client{" +
                 "Id=" + Id +
-                ", Sirname='" + Surname + '\'' +
+                ", Sirname='" + Sirname + '\'' +
                 ", Name='" + Name + '\'' +
                 ", PatronymicName='" + PatronymicName + '\'' +
                 ", Birthday=" + Birthday +
