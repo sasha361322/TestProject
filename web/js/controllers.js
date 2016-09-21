@@ -5,8 +5,4 @@ clientApp.controller('ClientList', function ($scope, $http){
         console.log('This is Data:',data,'\n\n This is Status',status,'\n\nThis is Headers',headers,'\n\nThis is Config',config);
         $scope.clients = data;
     });
-
-    var date = new Date();
-
-    $scope.today = date;
 });
