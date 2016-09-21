@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-@RequestMapping("/client")
+@RequestMapping("")
 public class ClientController{
 //    public void setClientService(ClientService clientService) {
 //        this.clientService = clientService;
@@ -29,7 +29,7 @@ public class ClientController{
         return new ModelAndView("clients", data);
     }
 */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/clients.json", method = RequestMethod.GET)
     public List<Client>  listOfClients() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         ClientService clientService = (ClientService) context.getBean("clientServiceProxy");

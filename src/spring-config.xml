@@ -78,5 +78,6 @@
             </list>
         </property>
     </bean>
+
     <context:component-scan base-package="client.controller"/>
 </beans>

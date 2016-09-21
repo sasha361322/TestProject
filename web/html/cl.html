@@ -8,13 +8,22 @@
 <table border="2" width="80%">
     <tr>
         <th>Id</th>
-        <th>Имя</th>
         <th>Фамилия</th>
+        <th>Имя</th>
         <th>Отчество</th>
         <th>Дата рождения</th>
         <th>Номер счета</th>
     </tr>
+    <tr ng-repeat="client in clients">
+        <td>{{client.id}}</td>
+        <td>{{client.surname}}</td>
+        <td>{{client.name}}</td>
+        <td>{{client.patronymicName}}</td>
+        <td>{{client.birthday| date:'dd/MM/yyyy'}}</td>
+        <td>{{client.accountNumber}}</td>
+    </tr>
 </table>
+Длина {{ clients.length }} штук
 {{ 1 + 8 }}
 {{ today }}
 </body>
