@@ -41,5 +41,6 @@
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.7.1-1" level="project" />
+    <orderEntry type="library" name="angular" level="application" />
   </component>
 </module>

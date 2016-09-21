@@ -36,10 +36,6 @@
         p:sessionFactory-ref="sessionFactory"
     />
 
-    <!--<bean id="clientController"-->
-          <!--class="client.controller.ClientController"-->
-        <!--p:clientService-ref="clientService"-->
-    <!--/>-->
     <bean id="transactionInterceptor"
           class="org.springframework.transaction.interceptor.TransactionInterceptor"
           p:transactionManager-ref="transactionManager">
