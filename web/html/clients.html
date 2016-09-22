@@ -18,14 +18,79 @@
         <th>Дата рождения</th>
         <th>Номер счета</th>
     </tr>
-    <tr ng-repeat="client in clients | filter:query">
+    <tr ng-repeat="client in clients | filter:query" ng-form="delete ">
         <td>{{client.id}}</td>
         <td>{{client.surname}}</td>
         <td>{{client.name}}</td>
         <td>{{client.patronymicName}}</td>
         <td>{{client.birthday| date:'dd.MM.yyyy'}}</td>
         <td>{{client.accountNumber}}</td>
+        <td>
+            <button ng-click="Delete(client.id)">Удалить</button>
+            <button ng-click="PressedEdit(client.id)">Изменить</button>
+        </td>
     </tr>
-</table>,
+</table>
+<!--<form action="/client/" method="post">-->
+<div ng-if="edit==-1">
+    <h1>Добавить нового клиента</h1>
+    <form ng-submit="Add()">
+        <div class='form-group'>
+            <label for='id'>Id:</label>
+            <input required id='id' class='form-control' ng-model='newclient.id' type='number'>
+        </div>
+        <div class='form-group'>
+            <label for='surname'>Фамилия:</label>
+            <input required id='surname' class='form-control' ng-model='newclient.surname' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='name'>Имя:</label>
+            <input required id='name' class='form-control' ng-model='newclient.name' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='patronymicName'>Отчество:</label>
+            <input required id='patronymicName' class='form-control' ng-model='newclient.patronymicName' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='birthday'>Дата рождения:</label>
+            <input required id='birthday' class='form-control' ng-model='newclient.birthday' type='date'>
+        </div>
+        <div class='form-group'>
+            <label for='accountNumber'>Номер счета:</label>
+            <input required id='accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
+        </div>
+        <input type="submit" value="Добавить">
+    </form>
+</div>
+<div ng-if="edit!=-1">
+    <h1>Изменить данные клиента</h1>
+    <form ng-submit="Edit()">
+        <div class='form-group'>
+            <label for='id1'>Id:</label>
+            <input required id='id1' class='form-control' ng-model='oldclient.id' type='number' disabled value="{{edit}}">
+        </div>
+        <div class='form-group'>
+            <label for='surname1'>Фамилия:</label>
+            <input required id='surname1' class='form-control' ng-model='oldclient.surname' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='name1'>Имя:</label>
+            <input required id='name1' class='form-control' ng-model='oldclient.name' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='patronymicName1'>Отчество:</label>
+            <input required id='patronymicName1' class='form-control' ng-model='oldclient.patronymicName' type='text'>
+        </div>
+        <div class='form-group'>
+            <label for='birthday1'>Дата рождения:</label>
+            <input required id='birthday1' class='form-control' ng-model='oldclient.birthday' type='date'>
+        </div>
+        <div class='form-group'>
+            <label for='accountNumber1'>Номер счета:</label>
+            <input required id='accountNumber1' class='form-control' ng-model='oldclient.accountNumber' type='number'>
+        </div>
+        <input type="submit" value="Изменить">
+    </form>
+</div>
 </body>
 </html>

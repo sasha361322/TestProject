@@ -9,12 +9,35 @@ clientApp.factory('Client',[
     }
 ]);
 
-clientApp.controller('ClientList', function ($scope, $http, Client) {
+clientApp.controller('ClientList', function ($scope, $http, ClientService, Client) {
+    $scope.clients = Client.query();
+    $scope.edit = -1;
 
-    /*$http.get('client/clients.json').success(function (data, status, headers, config) {
-            console.log('This is Data:', data, '\n\n This is Status', status, '\n\nThis is Headers', headers, '\n\nThis is Config', config);
-            $scope.clients = data;
-        })*/
-         $scope.clients = Client.query();
+    $scope.Add = function () {
+        ClientService.AddClient($scope.newclient);
+        $scope.clients = Client.query();
     }
-)
+    $scope.Delete = function (id) {
+        ClientService.DeleteClient(id);
+        $scope.clients = Client.query();
+    }
+    $scope.PressedEdit = function (id) {
+        $scope.edit = id;
+    }
+    $scope.Edit = function () {
+        ClientService.EditClient($scope.oldclient);
+    }
+});
+clientApp.factory("ClientService",['$http', function($http){
+        var fac = {};
+        fac.AddClient = function (newclient) {
+            $http.post("client/add", newclient);
+        };
+        fac.DeleteClient = function (id) {
+            $http.delete("client/del/"+id);
+        };
+        fac.EditClient = function (oldclient) {
+            $http.put("client/edit", oldclient);
+        };
+        return fac;
+    }]);
