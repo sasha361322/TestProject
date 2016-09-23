@@ -45,7 +45,7 @@
                 <prop key="update*">PROPAGATION_REQUIRES_NEW</prop>
                 <prop key="remove*">PROPAGATION_REQUIRES_NEW</prop>
                 <prop key="get*">PROPAGATION_REQUIRED</prop>
-                <prop key="list*">PROPAGATION_REQUIRES_NEW, readOnly</prop>
+                <prop key="list*">PROPAGATION_REQUIRES_NEW</prop>
             </props>
         </property>
     </bean>

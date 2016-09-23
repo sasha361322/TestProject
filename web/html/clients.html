@@ -32,7 +32,7 @@
     </tr>
 </table>
 <!--<form action="/client/" method="post">-->
-<div ng-if="edit==-1">
+<div ng-show="edit==-1">
     <h1>Добавить нового клиента</h1>
     <form ng-submit="Add()">
         <div class='form-group'>
@@ -60,36 +60,38 @@
             <input required id='accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
         </div>
         <input type="submit" value="Добавить">
+        {{newclient | json}}
     </form>
 </div>
-<div ng-if="edit!=-1">
-    <h1>Изменить данные клиента</h1>
+<div ng-hide="edit==-1">
+    <h1>Редактировать клиента</h1>
     <form ng-submit="Edit()">
         <div class='form-group'>
-            <label for='id1'>Id:</label>
-            <input required id='id1' class='form-control' ng-model='oldclient.id' type='number' disabled value="{{edit}}">
+            <label for='_id'>Id:</label>
+            <input required id='_id' class='form-control' ng-model='oldclient.id' type='number' disabled value="{{edit}}">
         </div>
         <div class='form-group'>
-            <label for='surname1'>Фамилия:</label>
-            <input required id='surname1' class='form-control' ng-model='oldclient.surname' type='text'>
+            <label for='_surname'>Фамилия:</label>
+            <input required id='_surname' class='form-control' ng-model='oldclient.surname' type='text'>
         </div>
         <div class='form-group'>
-            <label for='name1'>Имя:</label>
-            <input required id='name1' class='form-control' ng-model='oldclient.name' type='text'>
+            <label for='_name'>Имя:</label>
+            <input required id='_name' class='form-control' ng-model='oldclient.name' type='text'>
         </div>
         <div class='form-group'>
-            <label for='patronymicName1'>Отчество:</label>
-            <input required id='patronymicName1' class='form-control' ng-model='oldclient.patronymicName' type='text'>
+            <label for='_patronymicName'>Отчество:</label>
+            <input required id='_patronymicName' class='form-control' ng-model='oldclient.patronymicName' type='text'>
         </div>
         <div class='form-group'>
-            <label for='birthday1'>Дата рождения:</label>
-            <input required id='birthday1' class='form-control' ng-model='oldclient.birthday' type='date'>
+            <label for='_birthday'>Дата рождения:</label>
+            <input required id='_birthday' class='form-control' ng-model='oldclient.birthday' type='date'>
         </div>
         <div class='form-group'>
-            <label for='accountNumber1'>Номер счета:</label>
-            <input required id='accountNumber1' class='form-control' ng-model='oldclient.accountNumber' type='number'>
+            <label for='_accountNumber'>Номер счета:</label>
+            <input required id='_accountNumber' class='form-control' ng-model='oldclient.accountNumber' type='number'>
         </div>
-        <input type="submit" value="Изменить">
+        <input type="submit" value="Сохранить">
+        {{oldclient | json}}
     </form>
 </div>
 </body>

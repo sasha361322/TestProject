@@ -45,7 +45,7 @@ public class ClientController{
         System.out.println("editcontroller");
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         ClientService clientService = (ClientService) context.getBean("clientServiceProxy");
-        clientService.addClient(client);
+        clientService.updateClient(client);
         return client;
     }
 }

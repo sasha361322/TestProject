@@ -1,8 +1,9 @@
 package client.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Client{
+public class Client implements Serializable{
     private int Id;
     private String Sirname;
     private String Name;

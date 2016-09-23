@@ -1,31 +1,33 @@
 var clientApp = angular.module('clientApp', ['ngRoute', 'ngResource']);
 
-clientApp.factory('Client',[
+clientApp.factory('Clients',[
     '$resource', function ($resource) {
-        return $resource('client/:clientId.:format',{
+        return $resource('client/:clientId',{
             clientId: 'clients',
             format: 'json'
         });
     }
 ]);
 
-clientApp.controller('ClientList', function ($scope, $http, ClientService, Client) {
-    $scope.clients = Client.query();
+clientApp.controller('ClientList', function ($scope, $http, ClientService, Clients) {
+    $scope.clients = Clients.query();
     $scope.edit = -1;
-
     $scope.Add = function () {
         ClientService.AddClient($scope.newclient);
-        $scope.clients = Client.query();
+        $scope.clients = Clients.query();
     }
     $scope.Delete = function (id) {
         ClientService.DeleteClient(id);
-        $scope.clients = Client.query();
+        $scope.clients = Clients.query();
     }
     $scope.PressedEdit = function (id) {
         $scope.edit = id;
+        Clients.query({'clientId'});
     }
     $scope.Edit = function () {
         ClientService.EditClient($scope.oldclient);
+        $scope.edit = -1;
+        $scope.clients = Clients.query();
     }
 });
 clientApp.factory("ClientService",['$http', function($http){
