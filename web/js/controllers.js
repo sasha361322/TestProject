@@ -7,27 +7,29 @@ clientApp.factory('Clients',[
         );
     }
 ]);
-clientApp.controller('ClientList', function ($scope, $http, Clients) {
+clientApp.controller('ClientList', function ($scope, $http, Clients, $route) {
     $scope.clients = Clients.query();
     $scope.edit = -1;
     $scope.Add = function () {
         Clients.save($scope.newclient);
         $scope.clients = Clients.query();
-        $scope.reload();
+        $route.reload();
     }
     $scope.Delete = function (id) {
-        Clients.delete({clientId:id})
+        Clients.delete({clientId:id});
         $scope.clients = Clients.query();
-        $scope.reload();
+        $route.reload();
     }
     $scope.PressedEdit = function (id) {
         $scope.edit = id;
         $scope.oldclient = Clients.get({clientId:id});
+        $scope.mydate = $scope.oldclient.birthday;
     }
     $scope.Edit = function () {
+        $scope.oldclient.birthday = document.getElementById('_birthday').value;
         Clients.update($scope.oldclient);
         $scope.edit = -1;
         $scope.clients = Clients.query();
-        $scope.reload();
+        $route.reload();
     }
 });

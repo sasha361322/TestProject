@@ -62,7 +62,6 @@
             <input required id='accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
         </div>
         <input type="submit" value="Добавить">
-        {{newclient | json}}
     </form>
 </div>
 <div ng-hide="edit==-1">
@@ -70,7 +69,7 @@
     <form ng-submit="Edit()">
         <div class='form-group'>
             <label for='_id'>Id:</label>
-            <input required id='_id' class='form-control' ng-model='oldclient.id' type='number' disabled value="{{edit}}">
+            <input required id='_id' class='form-control' ng-model='oldclient.id' type='number' disabled>
         </div>
         <div class='form-group'>
             <label for='_surname'>Фамилия:</label>
@@ -86,14 +85,12 @@
         </div>
         <div class='form-group'>
             <label for='_birthday'>Дата рождения:</label>
-            <input required id='_birthday' class='form-control' ng-model='oldclient.birthday' type='date' value="{{oldclient.birthday | date:'yyyy-MM-dd' }}">
-        </div>
+            <input required id='_birthday' class='form-control' ng-model='string' type='date' value="{{oldclient.birthday| date:'yyyy-MM-dd'}}">
         <div class='form-group'>
             <label for='_accountNumber'>Номер счета:</label>
             <input required id='_accountNumber' class='form-control' ng-model='oldclient.accountNumber' type='number'>
         </div>
         <input type="submit" value="Сохранить">
-        {{oldclient | json}}
     </form>
 </div>
 </body>
