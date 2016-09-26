@@ -1,27 +1,24 @@
 var clientApp = angular.module('clientApp', ['ngRoute', 'ngResource']);
-
 clientApp.factory('Clients',[
     '$resource', function ($resource) {
         return $resource('client/clients/:clientId', {}, {
                 update: { method: 'PUT' }
             }
-            // ,{
-            // clientId:'@clientId'
-        // }
         );
     }
 ]);
-
-clientApp.controller('ClientList', function ($scope, $http, ClientService, Clients) {
+clientApp.controller('ClientList', function ($scope, $http, Clients) {
     $scope.clients = Clients.query();
     $scope.edit = -1;
     $scope.Add = function () {
         Clients.save($scope.newclient);
         $scope.clients = Clients.query();
+        $scope.reload();
     }
     $scope.Delete = function (id) {
         Clients.delete({clientId:id})
         $scope.clients = Clients.query();
+        $scope.reload();
     }
     $scope.PressedEdit = function (id) {
         $scope.edit = id;
@@ -31,12 +28,6 @@ clientApp.controller('ClientList', function ($scope, $http, ClientService, Clien
         Clients.update($scope.oldclient);
         $scope.edit = -1;
         $scope.clients = Clients.query();
+        $scope.reload();
     }
 });
-clientApp.factory("ClientService",['$http', function($http){
-        var fac = {};
-        fac.EditClient = function (oldclient) {
-            $http.patch("client/edit", oldclient);
-        };
-        return fac;
-    }]);

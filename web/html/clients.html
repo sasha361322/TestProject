@@ -8,7 +8,10 @@
     <meta charset="utf-8">
 </head>
 <body ng-app="clientApp"  ng-controller="ClientList">
-<input type="text"ng-model="query">
+<br>
+<input placeholder="Поиск" type="text"ng-model="query">
+<br>
+<br>
 <table border="2" width="80%">
     <tr>
         <th>Id</th>
@@ -31,7 +34,6 @@
         </td>
     </tr>
 </table>
-<!--<form action="/client/" method="post">-->
 <div ng-show="edit==-1">
     <h1>Добавить нового клиента</h1>
     <form ng-submit="Add()">
@@ -84,7 +86,7 @@
         </div>
         <div class='form-group'>
             <label for='_birthday'>Дата рождения:</label>
-            <input required id='_birthday' class='form-control' ng-model='oldclient.birthday' type='date'>
+            <input required id='_birthday' class='form-control' ng-model='oldclient.birthday' type='date' value="{{oldclient.birthday | date:'yyyy-MM-dd' }}">
         </div>
         <div class='form-group'>
             <label for='_accountNumber'>Номер счета:</label>
