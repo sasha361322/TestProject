@@ -35,4 +35,10 @@ button:hover{
 }
 button:disabled{
      cursor: default;
- }
+}
+th{
+    width: 10%;
+}
+td{
+    width: 10%;
+}

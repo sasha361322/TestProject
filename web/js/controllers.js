@@ -27,6 +27,12 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
             $scope.reverse = false;
         }
     }
+    $scope.isSortUp = function(fieldName){
+        return $scope.sortField === fieldName && !$scope.reverse;
+    }
+    $scope.isSortDown = function(fieldName){
+        return $scope.sortField === fieldName && $scope.reverse;
+    }
     $scope.firstPage = function() {
         return $scope.currentPage == 0;
     }

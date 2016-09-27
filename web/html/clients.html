@@ -6,16 +6,21 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
     <script src="/js/controllers.js"></script>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body ng-app="clientApp"  ng-controller="ClientList">
+<body ng-app="clientApp"  ng-controller="ClientList" class="container">
 <br>
 <input placeholder="Поиск" type="text"ng-model="query">
 <br>
 <br>
-<table border="2" width="80%">
+<table border="2" width="70%">
     <tr>
-        <th class="headSortCell" ng-click="sort('id')">Id</th>
+        <th class="headSortCell" ng-click="sort('id')">
+            Id
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('id'),
+                                            'glyphicon-chevron-down' : isSortDown('id')}"></i>
+        </th>
         <th class="headSortCell" ng-click="sort('surname')">Фамилия</th>
         <th class="headSortCell" ng-click="sort('name')">Имя</th>
         <th class="headSortCell" ng-click="sort('patronymicName')">Отчество</th>
@@ -30,8 +35,8 @@
         <td>{{client.birthday| date:'dd.MM.yyyy'}}</td>
         <td>{{client.accountNumber}}</td>
         <td>
-            <button ng-click="Delete(client.id)">Удалить</button>
-            <button ng-click="PressedEdit(client.id)">Изменить</button>
+            <button class="btn btn-danger" ng-click="Delete(client.id)">Удалить</button>
+            <button class="btn btn-warning" ng-click="PressedEdit(client.id)">Изменить</button>
         </td>
     </tr>
 </table>
