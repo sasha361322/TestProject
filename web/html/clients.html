@@ -15,14 +15,14 @@
 <br>
 <table border="2" width="80%">
     <tr>
-        <th>Id</th>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Дата рождения</th>
-        <th>Номер счета</th>
+        <th class="headSortCell" ng-click="sort('id')">Id</th>
+        <th class="headSortCell" ng-click="sort('surname')">Фамилия</th>
+        <th class="headSortCell" ng-click="sort('name')">Имя</th>
+        <th class="headSortCell" ng-click="sort('patronymicName')">Отчество</th>
+        <th class="headSortCell" ng-click="sort('birthday')">Дата рождения</th>
+        <th class="headSortCell" ng-click="sort('accountNumber')">Номер счета</th>
     </tr>
-    <tr ng-repeat="client in clients | filter:query | startFrom: startingClient() | limitTo: clientsPerPage" ng-form="delete ">
+    <tr ng-repeat="client in clients | filter:query  | orderBy:sortField:reverse | startFrom: startingClient() | limitTo: clientsPerPage" ng-form="delete">
         <td>{{client.id}}</td>
         <td>{{client.surname}}</td>
         <td>{{client.name}}</td>
