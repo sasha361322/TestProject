@@ -22,7 +22,7 @@
         <th>Дата рождения</th>
         <th>Номер счета</th>
     </tr>
-    <tr ng-repeat="client in clients | filter:query" ng-form="delete ">
+    <tr ng-repeat="client in clients | filter:query | startFrom: startingItem() | limitTo: itemsPerPage" ng-form="delete ">
         <td>{{client.id}}</td>
         <td>{{client.surname}}</td>
         <td>{{client.name}}</td>
@@ -35,6 +35,11 @@
         </td>
     </tr>
 </table>
+<div id="pagination" class="row">
+    <button class="pull-left btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Назад</button>
+    <span>{{currentPage+1}} из {{numberOfPages()}}</span>
+    <button class="pull-right  btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
+</div>
 <div class="container">
     <button class="btn btn-primary" ng-click="PressedAdd()">{{ AddMessage }}</button>
 </div>

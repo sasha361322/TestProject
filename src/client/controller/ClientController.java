@@ -25,7 +25,6 @@ public class ClientController{
     }
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Client add(@RequestBody Client client) {
-        System.out.println("addcontroller");
         clientService.addClient(client);
         return client;
     }
@@ -36,7 +35,6 @@ public class ClientController{
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public Client edit(@RequestBody Client client) {
-        System.out.println("editcontroller");
         clientService.updateClient(client);
         return client;
     }
