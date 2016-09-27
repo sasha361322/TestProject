@@ -1,7 +1,7 @@
 <div id="popUpDialog-bg"  ng-show="showPopUpDialog">
     <div id="popUpDialog">
         <h1>{{ AddOrEditMessage }}</h1>
-        <form id="myForm" >
+        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifAddThenTrue)">
             <div class='form-group' class="content">
                 <label for='_id'>Id:</label>
                 <input required id='_id' class='form-control' ng-model='newclient.id' type='number' ng-disabled="!ifAddThenTrue">
@@ -20,13 +20,16 @@
             </div>
             <div class='form-group' class="content">
                 <label for='_birthday'>Дата рождения:</label>
-                <input required id='_birthday' class='form-control' ng-model='string' type='date' value="{{newclient.birthday| date:'yyyy-MM-dd'}}">
+                <input required id='_birthday' name='_birthday' class='form-control' ng-model='string' type='date' value="{{newclient.birthday| date:'yyyy-MM-dd'}}" min="1900-01-01">
             </div>
             <div class='form-group' class="content">
                 <label for='_accountNumber'>Номер счета:</label>
                 <input required id='_accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
             </div>
-            <button class="btn btn-primary" ng-click="AddOrEdit(ifAddThenTrue)">Сохранить</button>
+            <div ng-messages="myForm._birthday.$error">
+                <div ng-message="min">Нет таких старых людей, не ври!</div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Сохранить"/>
             <button class="btn btn-warning" ng-click="closePopUpDialog()">Закрыть</button>
         </form>
     </div>

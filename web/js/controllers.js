@@ -1,4 +1,4 @@
-var clientApp = angular.module('clientApp', ['ngRoute', 'ngResource']);
+var clientApp = angular.module('clientApp', ['ngRoute', 'ngResource', 'ngMessages']);
 clientApp.factory('Clients',[
     '$resource', function ($resource) {
         return $resource('client/clients/:clientId', {}, {
@@ -93,11 +93,13 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
                 $scope.showPopUpDialog = false;
             }
             $scope.Add = function () {
+                document.getElementById('myForm').reset();
                 Clients.save($scope.newclient);
                 $scope.clients = Clients.query();
                 $route.reload();
             }
             $scope.Edit = function () {
+                document.getElementById('myForm').reset();
                 Clients.update($scope.newclient);
                 $scope.edit = -1;
                 $scope.clients = Clients.query();
