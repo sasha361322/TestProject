@@ -6,9 +6,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
     <script src="/js/controllers.js"></script>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body ng-app="clientApp"  ng-controller="ClientList">
-
 <br>
 <input placeholder="Поиск" type="text"ng-model="query">
 <br>
@@ -35,64 +35,9 @@
         </td>
     </tr>
 </table>
-<div ng-show="edit==-1">
-    <h1>Добавить нового клиента</h1>
-    <form ng-submit="Add()">
-        <div class='form-group'>
-            <label for='id'>Id:</label>
-            <input required id='id' class='form-control' ng-model='newclient.id' type='number'>
-        </div>
-        <div class='form-group'>
-            <label for='surname'>Фамилия:</label>
-            <input required id='surname' class='form-control' ng-model='newclient.surname' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='name'>Имя:</label>
-            <input required id='name' class='form-control' ng-model='newclient.name' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='patronymicName'>Отчество:</label>
-            <input required id='patronymicName' class='form-control' ng-model='newclient.patronymicName' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='birthday'>Дата рождения:</label>
-            <input required id='birthday' class='form-control' ng-model='newclient.birthday' type='date'>
-        </div>
-        <div class='form-group'>
-            <label for='accountNumber'>Номер счета:</label>
-            <input required id='accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
-        </div>
-        <input type="submit" value="Добавить">
-    </form>
+<div class="container">
+    <button class="btn btn-primary" ng-click="PressedAdd()">{{ AddMessage }}</button>
 </div>
-<div ng-hide="edit==-1">
-    <h1>Редактировать клиента</h1>
-    <form ng-submit="Edit()">
-        <div class='form-group'>
-            <label for='_id'>Id:</label>
-            <input required id='_id' class='form-control' ng-model='oldclient.id' type='number' disabled>
-        </div>
-        <div class='form-group'>
-            <label for='_surname'>Фамилия:</label>
-            <input required id='_surname' class='form-control' ng-model='oldclient.surname' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='_name'>Имя:</label>
-            <input required id='_name' class='form-control' ng-model='oldclient.name' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='_patronymicName'>Отчество:</label>
-            <input required id='_patronymicName' class='form-control' ng-model='oldclient.patronymicName' type='text'>
-        </div>
-        <div class='form-group'>
-            <label for='_birthday'>Дата рождения:</label>
-            <input required id='_birthday' class='form-control' ng-model='string' type='date' value="{{oldclient.birthday| date:'yyyy-MM-dd'}}">
-        <div class='form-group'>
-            <label for='_accountNumber'>Номер счета:</label>
-            <input required id='_accountNumber' class='form-control' ng-model='oldclient.accountNumber' type='number'>
-        </div>
-        <input type="submit" value="Сохранить">
-    </form>
-</div>
+<po-up-dialog></po-up-dialog>
 </body>
 </html>
