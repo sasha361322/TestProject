@@ -14,23 +14,20 @@ clientApp.filter('startFrom', function(){
     }
 });
 clientApp.controller('ClientList', function ($scope, Clients, $route) {
-
-
-
     $scope.currentPage = 0;
-    $scope.itemsPerPage = 5;
+    $scope.clientsPerPage = 5;
     $scope.firstPage = function() {
         return $scope.currentPage == 0;
     }
     $scope.lastPage = function() {
-        var lastPageNum = Math.ceil($scope.items.length / $scope.itemsPerPage - 1);
+        var lastPageNum = Math.ceil($scope.clients.length / $scope.clientsPerPage - 1);
         return $scope.currentPage == lastPageNum;
     }
     $scope.numberOfPages = function(){
-        return Math.ceil($scope.items.length / $scope.itemsPerPage);
+        return Math.ceil($scope.clients.length / $scope.clientsPerPage);
     }
-    $scope.startingItem = function() {
-        return $scope.currentPage * $scope.itemsPerPage;
+    $scope.startingClient = function() {
+        return $scope.currentPage * $scope.clientsPerPage;
     }
     $scope.pageBack = function() {
         $scope.currentPage = $scope.currentPage - 1;
@@ -38,10 +35,6 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
     $scope.pageForward = function() {
         $scope.currentPage = $scope.currentPage + 1;
     }
-
-
-
-
     $scope.clients = Clients.query();
     $scope.AddMessage = 'Добавить нового пользователя';
 

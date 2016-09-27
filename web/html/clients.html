@@ -22,7 +22,7 @@
         <th>Дата рождения</th>
         <th>Номер счета</th>
     </tr>
-    <tr ng-repeat="client in clients | filter:query | startFrom: startingItem() | limitTo: itemsPerPage" ng-form="delete ">
+    <tr ng-repeat="client in clients | filter:query | startFrom: startingClient() | limitTo: clientsPerPage" ng-form="delete ">
         <td>{{client.id}}</td>
         <td>{{client.surname}}</td>
         <td>{{client.name}}</td>
