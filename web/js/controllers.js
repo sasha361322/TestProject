@@ -18,6 +18,7 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
     $scope.clientsPerPage = 5;
     $scope.sortField = undefined;
     $scope.reverse = false;
+    $scope.today = new Date();
     $scope.sort = function (fieldName) {
         if ($scope.sortField === fieldName){
             $scope.reverse = !$scope.reverse;

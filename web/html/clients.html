@@ -22,11 +22,31 @@
             <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('id'),
                                             'glyphicon-chevron-down' : isSortDown('id')}"></i>
         </th>
-        <th class="headSortCell" ng-click="sort('surname')">Фамилия</th>
-        <th class="headSortCell" ng-click="sort('name')">Имя</th>
-        <th class="headSortCell" ng-click="sort('patronymicName')">Отчество</th>
-        <th class="headSortCell" ng-click="sort('birthday')">Дата рождения</th>
-        <th class="headSortCell" ng-click="sort('accountNumber')">Номер счета</th>
+        <th class="headSortCell" ng-click="sort('surname')">
+            Фамилия
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('surname'),
+                                            'glyphicon-chevron-down' : isSortDown('surname')}"></i>
+        </th>
+        <th class="headSortCell" ng-click="sort('name')">
+            Имя
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('name'),
+                                            'glyphicon-chevron-down' : isSortDown('name')}"></i>
+        </th>
+        <th class="headSortCell" ng-click="sort('patronymicName')">
+            Отчество
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('patronymicName'),
+                                            'glyphicon-chevron-down' : isSortDown('patronymicName')}"></i>
+        </th>
+        <th class="headSortCell" ng-click="sort('birthday')">
+            Дата рождения
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('birthday'),
+                                            'glyphicon-chevron-down' : isSortDown('birthday')}"></i>
+        </th>
+        <th class="headSortCell" ng-click="sort('accountNumber')">
+            Номер счета
+            <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('accountNumber'),
+                                            'glyphicon-chevron-down' : isSortDown('accountNumber')}"></i>
+        </th>
     </tr>
     <tr ng-repeat="client in clients | filter:query  | orderBy:sortField:reverse | startFrom: startingClient() | limitTo: clientsPerPage" ng-form="delete">
         <td>{{client.id}}</td>
