@@ -1,10 +1,10 @@
 <div id="popUpDialog-bg"  ng-show="showPopUpDialog">
     <div id="popUpDialog">
         <h1>{{ AddOrEditMessage }}</h1>
-        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifAddThenTrue)">
+        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifAddThenTrue)" onsubmit="Check()">
             <div class='form-group' class="content">
                 <label for='_id'>Id:</label>
-                <input name="idinput" required id='_id' class='form-control' ng-model='newclient.id' type='number' ng-disabled="!ifAddThenTrue" check />
+                <input name="idinput" ng-model-options="{ debounce: 500 }" required id='_id' class='form-control' ng-model='newclient.id' type='number' ng-disabled="!ifAddThenTrue" check="{{!ifAddThenTrue}}" />
                 <div ng-messages="myForm.idinput.$error">
                     <div ng-message="check" style="color:#ff0000">Клиент с таким id уже существует!</div>
                 </div>

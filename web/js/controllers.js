@@ -67,6 +67,13 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         $scope.clients = Clients.query();
         $route.reload();
     }
+    $scope.Check = function () {
+        return false;
+        if (!Document.myForm.idinput.$error.check){
+            return true;
+        }
+        return false;
+    }
 }).directive('poUpDialog', function () {
     return{
         restrict:'E',
@@ -118,6 +125,9 @@ clientApp.directive('check', function () {
         require: 'ngModel',
         link: function($scope, element, attr, ClientList) {
             ClientList.$validators.check = function(modelValue, viewValue) {
+                if (attr.check){
+                    return true;
+                }
                 $scope.ids = [];
                 $scope.clients.forEach(function(item) {
                     $scope.ids.push(item.id);
@@ -127,12 +137,12 @@ clientApp.directive('check', function () {
                     return true;
                 }
                 var value = parseInt(viewValue);
-                if ($scope.ids.includes(value)) {
+                if (!$scope.ids.includes(value)) {
                     // it is valid
-                    return false;
+                    return true;
                 }
                 // it is invalid
-                return true;
+                return false;
             };
         }
     }
