@@ -113,3 +113,27 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         }
     }
 });
+clientApp.directive('check', function () {
+    return {
+        require: 'ngModel',
+        link: function($scope, element, attr, ClientList) {
+            ClientList.$validators.check = function(modelValue, viewValue) {
+                $scope.ids = [];
+                $scope.clients.forEach(function(item) {
+                    $scope.ids.push(item.id);
+                });
+                if (ClientList.$isEmpty(modelValue)) {
+                    // consider empty models to be valid
+                    return true;
+                }
+                var value = parseInt(viewValue);
+                if ($scope.ids.includes(value)) {
+                    // it is valid
+                    return false;
+                }
+                // it is invalid
+                return true;
+            };
+        }
+    }
+});
