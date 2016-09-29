@@ -1,8 +1,7 @@
 <div id="popUpDialog-bg"  ng-show="showPopUpDialog">
     <div id="popUpDialog">
         <h1>{{ AddOrEditMessage }}</h1>
-        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifEditThenTrue)" >
-            <!--onsubmit="Check1()"-->
+        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifEditThenTrue)">
             <div class='form-group' class="content">
                 <label for='_id'>Id:</label>
                 <input name="idinput" ng-model-options="{ debounce: 500 }" required id='_id' class='form-control' ng-model='newclient.id'
@@ -36,7 +35,7 @@
                 <label for='_accountNumber'>Номер счета:</label>
                 <input required id='_accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
             </div>
-            <input type="submit" class="btn btn-primary" value="Сохранить"/>
+            <input type="submit" class="btn btn-primary" value="Сохранить" ng-disabled="myForm.$invalid"/>
             <button class="btn btn-warning" ng-click="closePopUpDialog()">Закрыть</button>
         </form>
     </div>

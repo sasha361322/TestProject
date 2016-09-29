@@ -69,7 +69,6 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
     }
     $scope.Check1 = function () {
         alert (!Document.myForm.valid);
-
     }
 }).directive('poUpDialog', function () {
     return{
