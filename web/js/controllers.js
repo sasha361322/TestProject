@@ -59,7 +59,7 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
     //when Add button is pressed
     $scope.PressedAdd = function () {
         $scope.showPopUpDialog = true;
-        $scope.ifAddThenTrue = true;
+        $scope.ifEditThenTrue = false;
         $scope.AddOrEditMessage = $scope.AddMessage;
     }
     $scope.Delete = function (id) {
@@ -67,12 +67,9 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         $scope.clients = Clients.query();
         $route.reload();
     }
-    $scope.Check = function () {
-        return false;
-        if (!Document.myForm.idinput.$error.check){
-            return true;
-        }
-        return false;
+    $scope.Check1 = function () {
+        alert (!Document.myForm.valid);
+
     }
 }).directive('poUpDialog', function () {
     return{
@@ -83,11 +80,11 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
             var EditMessage = 'Редактировать пользователя';
             $scope.AddOrEditMessage = $scope.AddMessage;
             $scope.showPopUpDialog = false;
-            $scope.ifAddThenTrue = true;
+            $scope.ifEditThenTrue = false;
             //when Edit button is pressed
             $scope.PressedEdit = function (id) {
                 $scope.showPopUpDialog = true;
-                $scope.ifAddThenTrue = false;
+                $scope.ifEditThenTrue = true;
                 $scope.AddOrEditMessage = EditMessage;
                 $scope.newclient = Clients.get({clientId:id});
             }
@@ -125,8 +122,8 @@ clientApp.directive('check', function () {
         require: 'ngModel',
         link: function($scope, element, attr, ClientList) {
             ClientList.$validators.check = function(modelValue, viewValue) {
-                if (attr.check){
-                    return true;
+                if ((attr.check+'').indexOf('t')>-1){
+                    return true
                 }
                 $scope.ids = [];
                 $scope.clients.forEach(function(item) {

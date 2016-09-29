@@ -1,10 +1,12 @@
 <div id="popUpDialog-bg"  ng-show="showPopUpDialog">
     <div id="popUpDialog">
         <h1>{{ AddOrEditMessage }}</h1>
-        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifAddThenTrue)" onsubmit="Check()">
+        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifEditThenTrue)" >
+            <!--onsubmit="Check1()"-->
             <div class='form-group' class="content">
                 <label for='_id'>Id:</label>
-                <input name="idinput" ng-model-options="{ debounce: 500 }" required id='_id' class='form-control' ng-model='newclient.id' type='number' ng-disabled="!ifAddThenTrue" check="{{!ifAddThenTrue}}" />
+                <input name="idinput" ng-model-options="{ debounce: 500 }" required id='_id' class='form-control' ng-model='newclient.id'
+                       type='number' ng-disabled="ifEditThenTrue" check="{{ ifEditThenTrue }}" />
                 <div ng-messages="myForm.idinput.$error">
                     <div ng-message="check" style="color:#ff0000">Клиент с таким id уже существует!</div>
                 </div>
@@ -23,7 +25,8 @@
             </div>
             <div class='form-group' class="content">
                 <label for='_birthday'>Дата рождения:</label>
-                <input required id='_birthday' name='_birthday' class='form-control' ng-model='string' type='date' value="{{newclient.birthday| date:'yyyy-MM-dd'}}" min="1900-01-01" max="{{today| date:'yyyy-MM-dd'}}">
+                <input required id='_birthday' name='_birthday' class='form-control' ng-model='string' type='date'
+                       value="{{newclient.birthday| date:'yyyy-MM-dd'}}" min="1900-01-01" max="{{today| date:'yyyy-MM-dd'}}">
             </div>
             <div ng-messages="myForm._birthday.$error">
                 <div ng-message="min" style="color:#ff0000">Нет таких старых людей, не ври!</div>
