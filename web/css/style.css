@@ -48,3 +48,6 @@ input.ng-invalid {
 input.ng-valid {
     background-color: lightgreen;
 }
+.errorMessage{
+    color:#ff0000
+}

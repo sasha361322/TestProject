@@ -67,9 +67,6 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         $scope.clients = Clients.query();
         $route.reload();
     }
-    $scope.Check1 = function () {
-        alert (!Document.myForm.valid);
-    }
 }).directive('poUpDialog', function () {
     return{
         restrict:'E',
@@ -88,30 +85,28 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
                 $scope.newclient = Clients.get({clientId:id});
             }
             //when Add or Edit button is pressed. add if Add one
-            $scope.AddOrEdit = function (add) {
-                $scope.newclient.birthday = document.getElementById('_birthday').value;
-                if (add)
-                    $scope.Add();
-                else
+            $scope.AddOrEdit = function (edit) {
+                $scope.newclient.birthday = document.getElementById('birthdayinput').value;
+                alert($scope.newclient);
+                if (edit)
                     $scope.Edit();
-                $scope.showPopUpDialog = false;
+                else
+                    $scope.Add();
             }
             $scope.Add = function () {
-                document.getElementById('myForm').reset();
                 Clients.save($scope.newclient);
-                $scope.clients = Clients.query();
-                $route.reload();
+                $scope.closePopUpDialog();
             }
             $scope.Edit = function () {
-                document.getElementById('myForm').reset();
                 Clients.update($scope.newclient);
                 $scope.edit = -1;
-                $scope.clients = Clients.query();
-                $route.reload();
+                $scope.closePopUpDialog();
             }
             $scope.closePopUpDialog = function(){
-                document.getElementById('myForm').reset();
                 $scope.showPopUpDialog = false;
+                document.getElementById('myForm').reset();
+                $scope.clients = Clients.query();
+                $route.reload();
             }
         }
     }

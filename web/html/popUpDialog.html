@@ -1,42 +1,68 @@
 <div id="popUpDialog-bg"  ng-show="showPopUpDialog">
     <div id="popUpDialog">
         <h1>{{ AddOrEditMessage }}</h1>
-        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifEditThenTrue)">
+        <form id="myForm" name="myForm" ng-submit="AddOrEdit(ifEditThenTrue);  myForm.$setPristine();">
+
             <div class='form-group' class="content">
-                <label for='_id'>Id:</label>
-                <input name="idinput" ng-model-options="{ debounce: 500 }" required id='_id' class='form-control' ng-model='newclient.id'
-                       type='number' ng-disabled="ifEditThenTrue" check="{{ ifEditThenTrue }}" />
-                <div ng-messages="myForm.idinput.$error">
-                    <div ng-message="check" style="color:#ff0000">Клиент с таким id уже существует!</div>
+                <label for='idInput'>Id:</label>
+                <input name="idInput" ng-model-options="{ debounce: 500 }" required id='idInput' class='form-control' ng-model='newclient.id'
+                       type='number' ng-disabled="ifEditThenTrue" check="{{ ifEditThenTrue }}" ng-pattern="/\d+/"/>
+                <div class="errorMessage" ng-messages="myForm.idInput.$error" ng-show="myForm.$dirty">
+                    <div ng-message="check">Клиент с таким id уже существует!</div>
+                    <span ng-show="myForm.idInput.$touched && myForm.idInput.$error.required">Поле облязательно для заполнения!</span>
+                    <span ng-show="!myForm.idInput.$error.required && !myForm.idInput.$error.check && myForm.idInput.$invalid">Недопустимое число!</span>
                 </div>
             </div>
+
             <div class='form-group' class="content">
-                <label for='_surname'>Фамилия:</label>
-                <input required id='_surname' class='form-control' ng-model='newclient.surname' type='text'>
+                <label for='surnameInput'>Фамилия:</label>
+                <input required id='surnameInput' name="surnameInput" class='form-control' ng-model='newclient.surname' type='text' ng-pattern="/^[а-яё\s-]{1,40}$/i" ng-model-options="{ debounce: 500 }">
+                <div class="errorMessage" ng-messages="myForm.surnameInput.$error" ng-show="myForm.$dirty">
+                    <span ng-show="!myForm.$pristine && myForm.surnameInput.$touched && myForm.surnameInput.$error.required">Поле облязательно для заполнения!</span>
+                    <span ng-show="!myForm.surnameInput.$error.required && myForm.surnameInput.$invalid">Фамилия может состоять только из русских букв!</span>
+                </div>
             </div>
+
             <div class='form-group' class="content">
-                <label for='_name'>Имя:</label>
-                <input required id='_name' class='form-control' ng-model='newclient.name' type='text'>
+                <label for='nameInput'>Имя:</label>
+                <input required id='nameInput' name="nameInput" class='form-control' ng-model='newclient.name' type='text' ng-pattern="/^[а-яё\s-]{1,40}$/i" ng-model-options="{ debounce: 500 }">
+                <div class="errorMessage" ng-messages="myForm.nameInput.$error" ng-show="myForm.$dirty">
+                    <span ng-show="!myForm.$pristine && myForm.nameInput.$touched && myForm.nameInput.$error.required">Поле облязательно для заполнения!</span>
+                    <span ng-show="!myForm.nameInput.$error.required && myForm.nameInput.$invalid">Имя может состоять только из русских букв!</span>
+                </div>
             </div>
+
             <div class='form-group' class="content">
-                <label for='_patronymicName'>Отчество:</label>
-                <input required id='_patronymicName' class='form-control' ng-model='newclient.patronymicName' type='text'>
+                <label for='patronymicNameInput'>Отчество:</label>
+                <input required id='patronymicNameInput' name="patronymicNameInput" class='form-control' ng-model='newclient.patronymicName' type='text' ng-pattern="/^[а-яё\s-]{1,40}$/i"
+                       ng-model-options="{ debounce: 500 }">
+                <div class="errorMessage" ng-messages="myForm.patronymicNameInput.$error" ng-show="myForm.$dirty">
+                    <span ng-show="!myForm.$pristine && myForm.patronymicNameInput.$touched && myForm.patronymicNameInput.$error.required">Поле облязательно для заполнения!</span>
+                    <span ng-show="!myForm.patronymicNameInput.$error.required && myForm.patronymicNameInput.$invalid">Отчество может состоять только из русских букв!</span>
+                </div>
             </div>
+
             <div class='form-group' class="content">
-                <label for='_birthday'>Дата рождения:</label>
-                <input required id='_birthday' name='_birthday' class='form-control' ng-model='string' type='date'
+                <label for='birthdayinput'>Дата рождения:</label>
+                <input required id='birthdayinput' ng-model-options="{ debounce: 500 }" name='birthdayinput' class='form-control' ng-model='string' type='date'
                        value="{{newclient.birthday| date:'yyyy-MM-dd'}}" min="1900-01-01" max="{{today| date:'yyyy-MM-dd'}}">
+                <div class="errorMessage" ng-messages="myForm.birthdayinput.$error" ng-show="myForm.$dirty">
+                    <span ng-show="!myForm.$pristine && myForm.birthdayinput.$touched && myForm.birthdayinput.$error.required">Поле облязательно для заполнения!</span>
+                    <div ng-message="min">Нет таких старых людей, не ври!</div>
+                    <div ng-message="max">Вы не могли родиться в будущем!</div>
+                </div>
             </div>
-            <div ng-messages="myForm._birthday.$error">
-                <div ng-message="min" style="color:#ff0000">Нет таких старых людей, не ври!</div>
-                <div ng-message="max" style="color:#ff0000">Вы не могли родиться в будущем!</div>
-            </div>
+
             <div class='form-group' class="content">
-                <label for='_accountNumber'>Номер счета:</label>
-                <input required id='_accountNumber' class='form-control' ng-model='newclient.accountNumber' type='number'>
+                <label for='accountNumberInput'>Номер счета:</label>
+                <input required id='accountNumberInput' name="accountNumberInput" class='form-control' ng-model='newclient.accountNumber' type='number' ng-model-options="{ debounce: 500 }">
             </div>
-            <input type="submit" class="btn btn-primary" value="Сохранить" ng-disabled="myForm.$invalid"/>
-            <button class="btn btn-warning" ng-click="closePopUpDialog()">Закрыть</button>
+            <div class="errorMessage" ng-messages="myForm.accountNumberInput.$error" ng-show="myForm.$dirty">
+                <span ng-show="!myForm.$pristine && myForm.accountNumberInput.$touched && myForm.accountNumberInput.$error.required">Поле облязательно для заполнения!</span>
+                <span ng-show="!myForm.accountNumberInput.$error.required && !myForm.accountNumberInput.$error.check && myForm.accountNumberInput.$invalid">Недопустимое число!</span>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Сохранить" ng-disabled="myForm.$invalid"  ng-pattern="/\d+/"/>
+            <button class="btn btn-warning" ng-click="closePopUpDialog(); myForm.$setPristine();">Закрыть</button>
         </form>
     </div>
 </div>
