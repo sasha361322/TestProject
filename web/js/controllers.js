@@ -1,4 +1,5 @@
 var clientApp = angular.module('clientApp', ['ngRoute', 'ngResource', 'ngMessages']);
+//Фабрика для REST
 clientApp.factory('Clients',[
     '$resource', function ($resource) {
         return $resource('client/clients/:clientId', {}, {
@@ -7,6 +8,7 @@ clientApp.factory('Clients',[
         );
     }
 ]);
+//Фильтр для пагинации
 clientApp.filter('startFrom', function(){
     return function(input, start){
         start = +start;
@@ -14,11 +16,12 @@ clientApp.filter('startFrom', function(){
     }
 });
 clientApp.controller('ClientList', function ($scope, Clients, $route) {
+    //Для пагинации
     $scope.currentPage = 0;
     $scope.clientsPerPage = 5;
+    //Для сортировки по столбцам
     $scope.sortField = undefined;
     $scope.reverse = false;
-    $scope.today = new Date();
     $scope.sort = function (fieldName) {
         if ($scope.sortField === fieldName){
             $scope.reverse = !$scope.reverse;
@@ -53,6 +56,7 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
     $scope.pageForward = function() {
         $scope.currentPage = $scope.currentPage + 1;
     }
+    //Получить всех клиентов
     $scope.clients = Clients.query();
     $scope.AddMessage = 'Добавить нового пользователя';
 
@@ -62,11 +66,15 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         $scope.ifEditThenTrue = false;
         $scope.AddOrEditMessage = $scope.AddMessage;
     }
+    /**
+     * @param id - id удаляемого клиента
+     */
     $scope.Delete = function (id) {
         Clients.delete({clientId:id});
         $scope.clients = Clients.query();
         $route.reload();
     }
+    //Директива для всплывающей формы, в которой происходит добавление/удаление клиента
 }).directive('poUpDialog', function () {
     return{
         restrict:'E',
@@ -76,7 +84,7 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
             var EditMessage = 'Редактировать пользователя';
             $scope.AddOrEditMessage = $scope.AddMessage;
             $scope.showPopUpDialog = false;
-            $scope.ifEditThenTrue = false;
+            $scope.ifEditThenTrue = false;//переменная определяющая, какая из возможных операция (добавлени/удаление) выполняется
             //when Edit button is pressed
             $scope.PressedEdit = function (id) {
                 $scope.showPopUpDialog = true;
@@ -84,10 +92,9 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
                 $scope.AddOrEditMessage = EditMessage;
                 $scope.newclient = Clients.get({clientId:id});
             }
-            //when Add or Edit button is pressed. add if Add one
+            //when Add or Edit button is pressed.
             $scope.AddOrEdit = function (edit) {
                 $scope.newclient.birthday = document.getElementById('birthdayinput').value;
-                alert($scope.newclient);
                 if (edit)
                     $scope.Edit();
                 else
@@ -102,6 +109,9 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
                 $scope.edit = -1;
                 $scope.closePopUpDialog();
             }
+            /**
+             * Функция очищающая форму
+             */
             $scope.closePopUpDialog = function(){
                 $scope.showPopUpDialog = false;
                 document.getElementById('myForm').reset();
@@ -111,17 +121,20 @@ clientApp.controller('ClientList', function ($scope, Clients, $route) {
         }
     }
 });
+//Валидация ввода id
 clientApp.directive('check', function () {
     return {
         require: 'ngModel',
         link: function($scope, element, attr, ClientList) {
             ClientList.$validators.check = function(modelValue, viewValue) {
+                //attr(check) содержит Boolean переменную = ifEditThenTrue. Так как в js if(Boolean(false)) - true, следущее условие кажется
+                //неплохим вариантом правильно проверить. конкатенируем с пустой строкой, если эта строка содержит букву 't'('true')\, то...
                 if ((attr.check+'').indexOf('t')>-1){
-                    return true
+                    return true//в случае, если на форме происходит изменение, то нам не надо проверять. возвращаем сразу true
                 }
-                $scope.ids = [];
+                $scope.ids = [];//массив idшников.
                 $scope.clients.forEach(function(item) {
-                    $scope.ids.push(item.id);
+                    $scope.ids.push(item.id);//заполняем его
                 });
                 if (ClientList.$isEmpty(modelValue)) {
                     // consider empty models to be valid
@@ -130,7 +143,7 @@ clientApp.directive('check', function () {
                 var value = parseInt(viewValue);
                 if (!$scope.ids.includes(value)) {
                     // it is valid
-                    return true;
+                    return true;//если наш список idшников не содержит введенного, то этот id уникален и разрешен ввод
                 }
                 // it is invalid
                 return false;

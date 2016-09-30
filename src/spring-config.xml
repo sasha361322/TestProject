@@ -36,40 +36,38 @@
         p:sessionFactory-ref="sessionFactory"
     />
 
-    <bean id="transactionInterceptor"
-          class="org.springframework.transaction.interceptor.TransactionInterceptor"
-          p:transactionManager-ref="transactionManager">
-        <property name="transactionAttributes">
-            <props>
-                <prop key="add*">PROPAGATION_REQUIRES_NEW</prop>
-                <prop key="update*">PROPAGATION_REQUIRES_NEW</prop>
-                <prop key="remove*">PROPAGATION_REQUIRES_NEW</prop>
-                <prop key="get*">PROPAGATION_REQUIRED</prop>
-                <prop key="list*">PROPAGATION_REQUIRES_NEW</prop>
-            </props>
-        </property>
-    </bean>
+       <bean id="transactionManager"
+             class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+             p:dataSource-ref="clientDataSource"
+             p:sessionFactory-ref="sessionFactory"
+       />
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate5.HibernateTransactionManager"
-          p:dataSource-ref="clientDataSource"
-          p:sessionFactory-ref="sessionFactory"
-    />
+       <bean id="transactionInterceptor"
+             class="org.springframework.transaction.interceptor.TransactionInterceptor"
+             p:transactionManager-ref="transactionManager">
+           <property name="transactionAttributes">
+               <props>
+                   <prop key="add*">PROPAGATION_REQUIRES_NEW</prop>
+                   <prop key="update*">PROPAGATION_REQUIRES_NEW</prop>
+                   <prop key="remove*">PROPAGATION_REQUIRES_NEW</prop>
+                   <prop key="get*">PROPAGATION_REQUIRED</prop>
+                   <prop key="list*">PROPAGATION_REQUIRES_NEW</prop>
+               </props>
+           </property>
+       </bean>
+
+       <bean id="clientServiceProxy"
+             class="org.springframework.aop.framework.ProxyFactoryBean"
+             p:target-ref="clientService">
+           <property name="interceptorNames">
+               <list>
+                   <value>transactionInterceptor</value>
+               </list>
+           </property>
+       </bean>
 
     <bean id="clientController" class="client.controller.ClientController" p:clientService-ref="clientServiceProxy">
     </bean>
-
-    <bean id="clientServiceProxy"
-          class="org.springframework.aop.framework.ProxyFactoryBean"
-          p:target-ref="clientService">
-        <property name="interceptorNames">
-            <list>
-                <value>transactionInterceptor</value>
-            </list>
-        </property>
-    </bean>
-
-    <mvc:annotation-driven />
 
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 
@@ -80,6 +78,8 @@
             </list>
         </property>
     </bean>
+
+    <mvc:annotation-driven />
 
     <context:component-scan base-package="client.controller"/>
 
